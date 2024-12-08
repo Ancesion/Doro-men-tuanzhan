@@ -232,17 +232,70 @@
             document.getElementById('path').innerText = `当前界面路径: 第一级界面 > 第二级界面 (${section})`;
         }
 
+        async function confirmSubmit() {
+            if (confirm('兄弟们的信息就靠你了活爹，确定提交吗？')) {
+                const tableData = collectTableData();
+                const token = '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'; // 替换为您的 GitHub Personal Access Token
+                const repo = 'Ancesion/Doro-men-tuanzhan'; // 替换为您的 GitHub 仓库
+                const filePath = 'data/tableData.json'; // 文件路径
+
+                const url = `https://api.github.com/repos/${repo}/contents/${filePath}`;
+                const headers = {
+                    'Authorization': `token ${token}`,
+                    'Content-Type': 'application/json'
+                };
+
+                try {
+                    // 检查文件是否已存在
+                    const response = await fetch(url, { headers });
+                    const sha = response.ok ? (await response.json()).sha : null;
+
+                    // 提交新内容
+                    const payload = {
+                        message: '更新表格数据',
+                        content: btoa(JSON.stringify(tableData, null, 2)), // 转为 Base64 格式
+                        sha: sha
+                    };
+
+                    const saveResponse = await fetch(url, {
+                        method: 'PUT',
+                        headers,
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (saveResponse.ok) {
+                        alert('提交成功！内容已保存到云端。');
+                    } else {
+                        alert('提交失败，请检查权限或网络设置。');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('提交失败，请检查权限或网络设置。');
+                }
+            }
+        }
+
+        // 收集所有表格数据
+        function collectTableData() {
+            const tables = document.querySelectorAll('table');
+            const data = [];
+
+            tables.forEach((table) => {
+                const rows = Array.from(table.querySelectorAll('tbody tr'));
+                const tableData = rows.map((row) =>
+                    Array.from(row.cells).map((cell) => cell.textContent.trim())
+                );
+                data.push(tableData);
+            });
+
+            return data;
+        }
+
         function confirmReturn() {
             if (confirm('未提交的内容不会保存，确定？')) {
                 document.getElementById('first-level').style.display = 'block';
                 document.getElementById('second-level').style.display = 'none';
                 document.getElementById('path').innerText = '当前界面路径: 第一级界面';
-            }
-        }
-
-        function confirmSubmit() {
-            if (confirm('兄弟们的信息就靠你了活爹，确定提交吗？')) {
-                alert('提交成功！内容已永久保存。');
             }
         }
     </script>
