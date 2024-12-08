@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>二级界面网站</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-bottom: 1px solid #ccc;
+        }
+        .button-group {
+            margin: 20px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: darkblue;
+        }
+        .content {
+            margin: 20px;
+        }
+        .table-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+        .table {
+            border-collapse: collapse;
+            width: 45%;
+            border: 1px solid #ccc;
+        }
+        .table th, .table td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+        .table th {
+            background-color: #f4f4f4;
+        }
+        .table th, .table td {
+            width: 300%;
+        }
+        .actions {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+        .action-button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .action-button.return {
+            background-color: gray;
+            color: white;
+        }
+        .action-button.submit {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span id="path">当前界面路径: 第一级界面</span>
+    </div>
+
+    <div id="first-level" class="button-group">
+        <button class="button" onclick="navigateTo('上')">上</button>
+        <button class="button" onclick="navigateTo('中')">中</button>
+        <button class="button" onclick="navigateTo('下')">下</button>
+    </div>
+
+    <div id="second-level" class="content" style="display: none;">
+        <div class="table-container">
+            <div id="container-top" style="display: none;">
+                <h3>第一队 (上)</h3>
+                <table class="table" id="table-top-left">
+                    <thead>
+                        <tr>
+                            <th>角色名</th>
+                            <th>出手次序</th>
+                            <th>乱速条</th>
+                            <th>首回合行动条</th>
+                            <th>羁绊</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <h3>第二队 (上)</h3>
+                <table class="table" id="table-top-right">
+                    <thead>
+                        <tr>
+                            <th>角色名</th>
+                            <th>出手次序</th>
+                            <th>乱速条</th>
+                            <th>首回合行动条</th>
+                            <th>羁绊</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="container-middle" style="display: none;">
+                <h3>第一队 (中)</h3>
+                <table class="table" id="table-middle-left">
+                    <thead>
+                        <tr>
+                            <th>角色名</th>
+                            <th>出手次序</th>
+                            <th>乱速条</th>
+                            <th>首回合行动条</th>
+                            <th>羁绊</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <h3>第二队 (中)</h3>
+                <table class="table" id="table-middle-right">
+                    <thead>
+                        <tr>
+                            <th>角色名</th>
+                            <th>出手次序</th>
+                            <th>乱速条</th>
+                            <th>首回合行动条</th>
+                            <th>羁绊</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="container-bottom" style="display: none;">
+                <h3>第一队 (下)</h3>
+                <table class="table" id="table-bottom-left">
+                    <thead>
+                        <tr>
+                            <th>角色名</th>
+                            <th>出手次序</th>
+                            <th>乱速条</th>
+                            <th>首回合行动条</th>
+                            <th>羁绊</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+                <h3>第二队 (下)</h3>
+                <table class="table" id="table-bottom-right">
+                    <thead>
+                        <tr>
+                            <th>角色名</th>
+                            <th>出手次序</th>
+                            <th>乱速条</th>
+                            <th>首回合行动条</th>
+                            <th>羁绊</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                        <tr contenteditable="true"><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="actions">
+            <button class="action-button return" onclick="confirmReturn()">返回</button>
+            <button class="action-button submit" onclick="confirmSubmit()">提交</button>
+        </div>
+    </div>
+
+    <script>
+        function navigateTo(section) {
+            document.getElementById('first-level').style.display = 'none';
+            document.getElementById('second-level').style.display = 'block';
+            document.getElementById('container-top').style.display = 'none';
+            document.getElementById('container-middle').style.display = 'none';
+            document.getElementById('container-bottom').style.display = 'none';
+
+            if (section === '上') {
+                document.getElementById('container-top').style.display = 'block';
+            } else if (section === '中') {
+                document.getElementById('container-middle').style.display = 'block';
+            } else if (section === '下') {
+                document.getElementById('container-bottom').style.display = 'block';
+            }
+
+            document.getElementById('path').innerText = `当前界面路径: 第一级界面 > 第二级界面 (${section})`;
+        }
+
+        function confirmReturn() {
+            if (confirm('未提交的内容不会保存，确定？')) {
+                document.getElementById('first-level').style.display = 'block';
+                document.getElementById('second-level').style.display = 'none';
+                document.getElementById('path').innerText = '当前界面路径: 第一级界面';
+            }
+        }
+
+        function confirmSubmit() {
+            if (confirm('兄弟们的信息就靠你了活爹，确定提交吗？')) {
+                alert('提交成功！内容已永久保存。');
+            }
+        }
+    </script>
+</body>
+</html>
