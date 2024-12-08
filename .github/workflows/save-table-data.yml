@@ -1,0 +1,18 @@
+name: Save Table Data
+
+on:
+  push:
+    paths:
+      - "data/tableData.json"
+
+jobs:
+  save:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log table data
+        run: |
+          echo "Table data has been updated:"
+          cat data/tableData.json
